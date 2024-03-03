@@ -3,21 +3,33 @@ from router_lights_up import get_statistic_routerLightsUp
 from power_supply import  get_statistic_powerSupply
 from lostPackets import get_statistic_lostPackage
 from timeLost import get_statistic_lostTime
-
-print("ispStatus returned: ", end = "")
-print(get_statistic_ispStatus())
-
-print("routerLightsUp returned: ", end = "")
-print(get_statistic_routerLightsUp())
-
-print("get_statistic_powerSupply returned: ", end = "")
-print(get_statistic_powerSupply())
-
-print("get_statistic_lostPackage returned: ", end = "")
-print(get_statistic_lostPackage())
+from isConnected import is_connected
 
 
-print("get_statistic_timeLost returned: ", end = "")
-print(get_statistic_lostTime())
+def get_final_stats():
+    if(is_connected()):
+        print("ispStatus returned: ", end = "")
+        print(get_statistic_ispStatus())
 
-print("Delete this print statement")
+        print("routerLightsUp returned: ", end = "")
+        print(get_statistic_routerLightsUp())
+
+        print("get_statistic_powerSupply returned: ", end = "")
+        print(get_statistic_powerSupply())
+
+        print("get_statistic_lostPackage returned: ", end = "")
+        print(get_statistic_lostPackage())
+
+
+        print("get_statistic_timeLost returned: ", end = "")
+        print(get_statistic_lostTime())
+        return True
+    
+    else:
+        return False
+    
+    # ADDING DEAD CODE
+    
+
+
+
