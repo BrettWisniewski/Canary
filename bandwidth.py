@@ -33,6 +33,6 @@ def main():
     else:  # Less than 1 KB/s is considered really bad
         print("Really bad bandwidth.")
 
-
+print("delete this print statement")
 if __name__ == "__main__":
     main()
