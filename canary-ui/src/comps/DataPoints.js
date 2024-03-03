@@ -28,25 +28,11 @@ const DataPoints = () => {
 
     useEffect(() => {
         getData();
-        fetch(`https://ipgeolocation.abstractapi.com/v1/?api_key=b5c4ed14297a4882a23033d182d540a4&ip_address=${ip}`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setDataPoints(data)
-            })
-            .catch((error) => {
-                console.error('Fetch error:', error);
-            });
     }, []);
-
-    const longitude = -105.26632690429688
-    const latitude = 40.00740051269531
-    const embedUrl = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3056.521071164178!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1709467764059!5m2!1sen!2sus`
 
     return (
         <>
-            <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleRefresh}>Refresh<RefreshIcon /></Button>
+            <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleRefresh}>Load Data<RefreshIcon /></Button>
             <Paper elevation={3}
                 sx={{
                     borderRadius: 8,
@@ -66,6 +52,7 @@ const DataPoints = () => {
                         <Typography variant="body2" gutterBottom fontFamily="'Courier New', monospace">Country: {dataPoints.country}</Typography>
                         <Typography variant="body2" gutterBottom fontFamily="'Courier New', monospace">Continent: {dataPoints.continent}</Typography>
                         <Typography variant="h6" gutterBottom fontWeight="bold">Approximate Mapping:</Typography>
+                        <Typography variant="body2" gutterBottom fontFamily="'Courier New', monospace">({dataPoints.longitude}, {dataPoints.latitude})</Typography>
                         <iframe
                             title="Google Maps"
                             width="600"

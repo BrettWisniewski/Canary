@@ -10,6 +10,7 @@ import Calculations from './items/Calculations';
 import EmailConfig from './EmailConfig';
 import DataPoints from './DataPoints';
 import Chart from './items/Chart'
+import ProjectLog from './ProjectLog';
 
 const Hero = (props) => {
     const [someValue, setValue] = useState(0);
@@ -96,6 +97,7 @@ const Hero = (props) => {
                                 <Tab label="Network Stability" value="1" />
                                 <Tab label="Data Points" value="2" />
                                 <Tab label="Email Config" value="3" />
+                                <Tab label="Project Log" value="4" />
                             </TabList>
                         </Box>
                         <TabPanel value="1">
@@ -110,6 +112,10 @@ const Hero = (props) => {
                         <TabPanel value="3">
                             <Typography variant="h5" gutterBottom>Email Config:</Typography>
                             <EmailConfig emailProps={props.emailProps}/>
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <Typography variant="h5" gutterBottom>Project Log:</Typography>
+                            <ProjectLog />
                         </TabPanel>
                     </TabContext>
                 </Paper>
