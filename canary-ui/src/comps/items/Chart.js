@@ -1,12 +1,10 @@
 import { Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 
-const newData = [0.1, 0.2, 0.3, 0.4, 0.1, 0.2, 0.3, 0.4, 0.5, 0.1, 0.2, 0.3]
-const formattedData = newData.map((value, index) => ({ index, value }));
-
-const Chart = () => {
-  const [chartData, setChartData] = useState(newData);
+const Chart = (props) => {
+  console.log(props.some)
+  var formattedData = props.some?.map((value, index) => ({ index, value }));
   return (
     <>
     <Typography variant='h5' gutterBottom>Status Graph:</Typography>
@@ -15,7 +13,7 @@ const Chart = () => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="index" />
           <YAxis />
-          <Line type="monotone" dataKey="value" stroke="#fff" strokeWidth={2} />
+          <Line type="monotone" dataKey="value" stroke="#fff" strokeWidth={2} isAnimationActive={false}/>
         </LineChart>
       </ResponsiveContainer>
     </>

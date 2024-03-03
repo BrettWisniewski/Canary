@@ -8,17 +8,52 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Calculations from './items/Calculations';
 import EmailConfig from './EmailConfig';
-import ComputerInfo from './ComputerInfo';
 import DataPoints from './DataPoints';
 import Chart from './items/Chart'
+import ProjectLog from './ProjectLog';
+import PingTest from './PingTest';
 
 const Hero = (props) => {
-    const [Value, setValue] = useState(0);
+    const [someValue, setValue] = useState(0);
+    const zerosArray = Array.from({ length: 40 }, () => 0);
+    const [dataArray, setDataArray] = useState(zerosArray)
+    const [jitterValue, setJitterValue] = useState(someValue)
+
+    const makeJitterValue = (some) => {
+        const direction = Math.random() > 0.5 ? 1 : -1;
+        const jitter = Math.random() * 4 * direction;
+        let newValue = some + jitter;
+        newValue = Math.max(0, Math.min(newValue, 100));
+        newValue = Math.round(newValue);
+        return newValue;
+    };
+      
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setValue((prevValue) => (prevValue < 100 ? prevValue + 1 : 0));
-        }, 100);
+            fetch("http://localhost:5000/mainvalue")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setValue(data.mainvalue)
+                setJitterValue(data.mainvalue)
+                setDataArray((prevArray) => {
+                    const newArray = [data.mainvalue, ...prevArray.slice(0, -1)];
+                    return newArray;
+                });
+            })
+            .catch((error) => {
+                console.error('Fetch error:', error);
+            });
+            const newJitterValue = makeJitterValue(someValue)
+            setJitterValue(newJitterValue)
+            setDataArray((prevArray) => {
+                const newArray = [newJitterValue, ...prevArray.slice(0, -1)];
+                return newArray;
+              });
+        }, 500);
         return () => clearInterval(intervalId);
     }, []);
 
@@ -28,32 +63,16 @@ const Hero = (props) => {
     };
 
     const calculateBackgroundColor = (value) => {
-        const normalizedValue = value - 70;
-        const hue = normalizedValue * (5.0 / 2.0);
-        
+        const normalizedValue = value - 70;        
         return `hsl(0, 100%, ${normalizedValue}%)`;
       };
       
-
     const containerStyle = {
         padding: 30,
         marginTop: 16,
         borderRadius: 15,
-        border: `2px solid ${calculateBorderColor(Value)}`,
+        border: `2px solid ${calculateBorderColor(someValue)}`,
     }
-
-    useEffect(() => {
-        fetch("http://localhost:5000/main-value")
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error('Fetch error:', error);
-            });
-    }, []);
 
     const [tabValue, setTabValue] = React.useState('1');
 
@@ -61,15 +80,45 @@ const Hero = (props) => {
         setTabValue(newValue);
     };
 
-    if (Value > 70) {
-        document.body.style.backgroundColor = calculateBackgroundColor(Value);
+    const sendData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/emails', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userEmail: props.userEmail,
+                emails: props.emails,
+                emailMessage: props.emailMessage,
+              }),
+      
+          });
+    
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+    
+          // Handle the successful response here
+          const result = await response.json();
+          console.log(result);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    };            
+
+    if (someValue > 70) {
+        document.body.style.backgroundColor = calculateBackgroundColor(someValue);
+        if (someValue > 90) {
+            sendData()
+        }
     } else {
         document.body.style.backgroundColor = "#121212";
     }
 
     return (
         <>
-            <Container>
+            <Container sx={{marginBottom: 4}}>
                 <Paper elevation={3} style={containerStyle}>
                     <Typography variant="h2" gutterBottom fontWeight="bold">Canary</Typography>
                     <Typography variant="h6" gutterBottom><Calculations /></Typography>
@@ -78,25 +127,31 @@ const Hero = (props) => {
                             <TabList onChange={handleChange} aria-label="lab API tabs example">
                                 <Tab label="Network Stability" value="1" />
                                 <Tab label="Data Points" value="2" />
-                                <Tab label="Computer Information" value="3" />
-                                <Tab label="Email Config" value="4" />
+                                <Tab label="Email Config" value="3" />
+                                <Tab label="Project Log" value="4" />
+                                <Tab label="Ping Test" value="5" />
                             </TabList>
                         </Box>
                         <TabPanel value="1">
                             <Typography variant="h5" gutterBottom>Network Stability Score:</Typography>
-                            <Speedometer value={Value} />
+                            <Speedometer value={jitterValue} />
+                            <Chart some={dataArray}/>
                         </TabPanel>
                         <TabPanel value="2">
                             <Typography variant="h5" gutterBottom>Data Points:</Typography>
                             <DataPoints />
                         </TabPanel>
                         <TabPanel value="3">
-                            <Typography variant="h5" gutterBottom>Computer Information:</Typography>
-                            <ComputerInfo />
-                        </TabPanel>
-                        <TabPanel value="4">
                             <Typography variant="h5" gutterBottom>Email Config:</Typography>
                             <EmailConfig emailProps={props.emailProps}/>
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <Typography variant="h5" gutterBottom>Project Log:</Typography>
+                            <ProjectLog />
+                        </TabPanel>
+                        <TabPanel value="5">
+                            <Typography variant="h5" gutterBottom>Ping Test:</Typography>
+                            <PingTest />
                         </TabPanel>
                     </TabContext>
                 </Paper>
