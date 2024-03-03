@@ -17,7 +17,6 @@ const EmailConfig = (props) => {
     }
 
     const handleSubmit = () => {
-        console.log(props)
         props.emailProps.setUserEmail(mainEmail)
         props.emailProps.setEmailMessage(tempMessage)
         props.emailProps.setEmails([...stagedEmails])

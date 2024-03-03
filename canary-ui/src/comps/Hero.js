@@ -10,6 +10,7 @@ import Calculations from './items/Calculations';
 import EmailConfig from './EmailConfig';
 import ComputerInfo from './ComputerInfo';
 import DataPoints from './DataPoints';
+import Chart from './items/Chart'
 
 const Hero = (props) => {
     const [Value, setValue] = useState(0);
