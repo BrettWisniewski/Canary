@@ -33,7 +33,6 @@ const PingTest = () => {
                 {data && (
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                     {data.map((entry, index) => {
-                    console.log(entry.from_loc.latlon)
                     var latitude = entry.from_loc.latlon.split(",")[0]
                     var longitude = entry.from_loc.latlon.split(",")[1]
                     return (
