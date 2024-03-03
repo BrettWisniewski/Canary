@@ -44,12 +44,12 @@ const ProjectLog = () => {
                 <Typography variant="h6" gutterBottom fontWeight="bold">Github Data:</Typography>
                 {data && (
                     <ul style={{ listStyle: 'none', padding: 0 }}>
-                    {commits.map((commit, index) => (
+                    {data.map((commit, index) => (
                       <li key={commit.sha} style={{ marginBottom: '10px' }}>
                         <strong>{commit.commit.author.name}</strong> committed on{' '}
                         {new Date(commit.commit.author.date).toLocaleString()}:
                         <br />
-                        {commit.commit.message}
+                        <a href={commit.html_url} target='_blank' rel="noopener noreferrer">{commit.commit.message}</a>
                       </li>
                     ))}
                   </ul>
