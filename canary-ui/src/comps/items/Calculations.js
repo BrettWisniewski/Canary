@@ -13,7 +13,9 @@ const Calculations = () => {
         "ping speed",
         "local outages",
         "network jitter",
-        "packet loss"
+        "packet loss",
+        "latency",
+        "bandwidth"
     ]
 
     const generateSequence = () => {
@@ -64,7 +66,7 @@ const Calculations = () => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Here we explain how the calculation works
+                        The different features, ping speed, local outages, network jitter, packet loss, latency, and bandwidth, are all weighted and produce a score on the network stability.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

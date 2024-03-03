@@ -1,16 +1,16 @@
 from flask import Flask, jsonify
-#from flask_cors import CORS
+from flask_cors import CORS
 from equations import get_final_stats
 
 app = Flask(__name__)
-#CORS(app, resources={r"/main-value": {"origins": "http://localhost:3000"},
-                     #r"/equations": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/mainvalue": {"origins": "http://localhost:3000"},
+                     r"/equations": {"origins": "http://localhost:3000"}})
 
-@app.route('/main-value')
+@app.route('/mainvalue')
 def getMainValue():
     main_value = get_final_stats()
     return jsonify({
-        'main-value': main_value
+        'mainvalue': main_value
     })
 
 @app.route('/equations')

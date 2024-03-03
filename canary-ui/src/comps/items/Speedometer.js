@@ -26,7 +26,6 @@ const Speedometer = (props) => {
           currentValueText={`${props.value}%`}
         />
       </Box>
-      <Chart />
     </>
   );
 };
