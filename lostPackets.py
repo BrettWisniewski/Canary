@@ -31,7 +31,7 @@ async def start():
     # print(f'Average Time: {avg_time} ms')
 
     statistic = update_universal(packet_loss)
-    return statistic 
+    return [statistic, packet_loss]
     
 
 def get_statistic_lostPackage():

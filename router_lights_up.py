@@ -47,6 +47,8 @@ def get_statistic_routerLightsUp():
         
         statistic = 1
 
-    return statistic
+    if statistic == 1:
+        return [1, "Off/Flashing"]
+    return [0, "On"]
 
 
