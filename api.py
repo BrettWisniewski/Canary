@@ -34,7 +34,7 @@ def takeEmeil():
 def getMainValue():
     main_value = get_final_stats()
     return jsonify({
-        'mainvalue': main_value
+        'mainvalue': main_value[0]
     })
 
 @app.route('/equations')
