@@ -16,14 +16,14 @@ def update_universal(timeSpent):
     """
     
     # Adjust tracker based on packet loss
-    if timeSpent >= 150:
+    if timeSpent >= 70:
         return 1
-    elif timeSpent < 150 and timeSpent >= 100:
-        return 0.8
-    elif timeSpent < 100 and timeSpent >= 80:
-        return 0.2
-    elif timeSpent < 80 and timeSpent >= 50:
-        return 0.1
+    elif timeSpent >=50:
+        return 0.75
+    elif timeSpent >= 40:
+        return 0.5
+    elif timeSpent >=30:
+        return 0.3
     return 0
 
 async def start():

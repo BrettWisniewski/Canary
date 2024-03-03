@@ -1,28 +1,31 @@
 import time
 import requests
 
-url = "https://www.example.com"  # Replace with the URL you want to test
+def check_latency():
+    url = "https://www.example.com"  # Replace with the URL you want to test
 
-start = time.perf_counter()  # Record the starting time
+    start = time.perf_counter()  # Record the starting time
 
 # Your code that involves a network operation
-response = requests.get(url)
+    response = requests.get(url)
 
-end = time.perf_counter() - start  # Calculate the elapsed time
+    end = time.perf_counter() - start  # Calculate the elapsed time
 
-print('{:.6f}s for the network operation'.format(end))  # Print the elapsed time in seconds
+    #print('{:.6f}s for the network operation'.format(end))  # Print the elapsed time in seconds
 
 
-if end >= 0.1 and end < 0.2:
-    # Bad latency
-    print("The network operation is slow")
-    # Add weights here later
-elif end >= 0.2:
-    # Very bad latency
-    print("The network operation is very slow")
-    # Add even higher weights here later
-else:
-    # Good latency
-    print("0")
-    # the weights will be 0 if the latency is low 
+    if end >= 0.4 and end < 0.6:
+        # Good latency
+        return "fine"
+        # Add weights here later
+    elif end >= 0.6 and end < 1.5:
+        # bad latency
+        return "bad"
+        # Add even higher weights here later
+    elif end < 0.4:
+        # very Good latency
+        return "very_good"
+    else:
+        # very bad latency
+        return "very_bad"
 
