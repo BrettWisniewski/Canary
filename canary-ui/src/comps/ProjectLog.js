@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Paper, Typography } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import DownloadIcon from '@mui/icons-material/Download';
 
 const ProjectLog = () => {
     const [data, setData] = useState(null);
@@ -20,7 +20,7 @@ const ProjectLog = () => {
 
     return (
         <>
-            <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleLoad}>Load Data<RefreshIcon /></Button>
+            <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleLoad}>Load Data<DownloadIcon /></Button>
             <Paper elevation={3}
                 sx={{
                     borderRadius: 8,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Paper, Typography, TextField } from '@mui/material';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+
 const PingTest = () => {
     const [data, setData] = useState(null);
 
@@ -18,7 +19,6 @@ const PingTest = () => {
     }
   return (
       <>
-       <TextField id="outlined-basic" label="IP" variant="outlined" sx={{display:"block", marginBottom: 4}}/>
        <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleLoad}>Run Test<DirectionsRunIcon /></Button>
        <Paper elevation={3}
                 sx={{
@@ -38,12 +38,12 @@ const PingTest = () => {
                     var longitude = entry.from_loc.latlon.split(",")[1]
                     return (
                       <div key={index}>
-                        <span>
-                            {entry.ip}: {entry.packets_sent} packets sent {entry.packets_received} received {entry.packet_loss}% loss from {' '}
+                        <Typography variant='body1' fontFamily="'Courier New', monospace">
+                            {entry.packets_sent} packets sent {entry.packets_received} received {entry.packet_loss}% loss from {' '}
                             <a href={`https://www.google.com/maps/@${latitude},${longitude},14z?entry=ttu`} target='_blank'>
                                 {entry.from_loc.city} {entry.from_loc.country}
-                            </a>
-                        </span>
+                            </a>{' '}avg. {entry.avg_rtt}ms
+                        </Typography>
                       </div>
                     )})}
                   </ul>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Paper, Typography } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import DownloadIcon from '@mui/icons-material/Download';
 import axios from "axios";
 import UserAgent from './NetworkInfo/UserAgent';
 
@@ -32,7 +32,7 @@ const DataPoints = () => {
 
     return (
         <>
-            <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleRefresh}>Load Data<RefreshIcon /></Button>
+            <Button size="large" variant='outlined' sx={{marginBottom: 2}} onClick={handleRefresh}>Load Data<DownloadIcon /></Button>
             <Paper elevation={3}
                 sx={{
                     borderRadius: 8,
