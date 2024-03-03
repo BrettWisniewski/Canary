@@ -19,3 +19,5 @@ print(get_statistic_lostPackage())
 
 print("get_statistic_timeLost returned: ", end = "")
 print(get_statistic_lostTime())
+
+print("Delete this print statement")
