@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Paper, Typography } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import axios from "axios";
 
 const ProjectLog = () => {
     const [data, setData] = useState(null);
-    const [ip, setIP] = useState("");
-
-    const getData = async () => {
-        const res = await axios.get("https://api.ipify.org/?format=json");
-        setIP(res.data.ip);
-    };
 
     const handleLoad = () => {
         fetch(`https://api.github.com/repos/BrettWisniewski/Canary/commits`)
@@ -24,10 +17,6 @@ const ProjectLog = () => {
                 console.error('Fetch error:', error);
             });
     }
-
-    useEffect(() => {
-        getData();
-    }, []);
 
     return (
         <>

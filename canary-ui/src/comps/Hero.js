@@ -11,6 +11,7 @@ import EmailConfig from './EmailConfig';
 import DataPoints from './DataPoints';
 import Chart from './items/Chart'
 import ProjectLog from './ProjectLog';
+import PingTest from './PingTest';
 
 const Hero = (props) => {
     const [someValue, setValue] = useState(0);
@@ -98,6 +99,7 @@ const Hero = (props) => {
                                 <Tab label="Data Points" value="2" />
                                 <Tab label="Email Config" value="3" />
                                 <Tab label="Project Log" value="4" />
+                                <Tab label="Ping Test" value="5" />
                             </TabList>
                         </Box>
                         <TabPanel value="1">
@@ -116,6 +118,10 @@ const Hero = (props) => {
                         <TabPanel value="4">
                             <Typography variant="h5" gutterBottom>Project Log:</Typography>
                             <ProjectLog />
+                        </TabPanel>
+                        <TabPanel value="5">
+                            <Typography variant="h5" gutterBottom>Ping Test:</Typography>
+                            <PingTest />
                         </TabPanel>
                     </TabContext>
                 </Paper>
