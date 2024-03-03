@@ -17,15 +17,12 @@ def update_universal(packet_loss):
     tracker = 0
     
     # Adjust tracker based on packet loss
-    if packet_loss >= 5:
-        return 1
-    elif packet_loss < 5 and packet_loss >= 3:
-        return 0.8
-    elif packet_loss < 3 and packet_loss >= 2:
+    if packet_loss >= 3:
+        return 0.75
+    elif packet_loss == 2:
+        return 0.45
+    elif packet_loss == 1:
         return 0.2
-    elif packet_loss < 2 and packet_loss >= 1:
-        return 0.1
-    
     return tracker
 
 async def start():
