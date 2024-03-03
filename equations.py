@@ -10,3 +10,4 @@ print(get_statistic_routerLightsUp())
 
 print("get_statistic_powerSupply returned: ", end = "")
 print(get_statistic_powerSupply())
+print("delete this print statement after")
