@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+from ..equations import get_final_stats
 
 app = Flask(__name__)
 CORS(app, resources={r"/main-value": {"origins": "http://localhost:3000"},
@@ -7,6 +8,7 @@ CORS(app, resources={r"/main-value": {"origins": "http://localhost:3000"},
 
 @app.route('/main-value')
 def getMainValue():
+    #main-value = get_final_stats()
     return jsonify({
         'main-value': 42
     })

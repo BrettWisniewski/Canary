@@ -82,10 +82,4 @@ def get_final_stats():
 
     else:
         return 100
-    
-    # ADDING DEAD CODE
-
-get_final_stats()
-
-
 
