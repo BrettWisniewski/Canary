@@ -8,7 +8,6 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Calculations from './items/Calculations';
 import EmailConfig from './EmailConfig';
-import ComputerInfo from './ComputerInfo';
 import DataPoints from './DataPoints';
 import Chart from './items/Chart'
 
