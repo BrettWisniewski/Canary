@@ -44,7 +44,9 @@ def get_statistic_ispStatus():
     # Close the browser
     driver.quit()
 
-    return statistic
+    if statistic == 1:
+        return [statistic, "Down"]
+    return [statistic, "Working"]
 
 # Call the function to get the statistic variable
 # statistic = get_statistic()

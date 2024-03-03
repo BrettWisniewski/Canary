@@ -32,7 +32,7 @@ async def start():
     # print(f'Average Time: {timeSpent} ms')
 
     statistic = update_universal(timeSpent)
-    return statistic 
+    return [statistic, timeSpent] 
     
 
 def get_statistic_lostTime():
