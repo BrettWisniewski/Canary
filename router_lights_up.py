@@ -36,13 +36,17 @@ def check_network_status(own_ip_address):
         print("An error occurred:", e)
         return False
 
+def get_statistic_routerLightsUp():
+    statistic = 0
+    own_ip_address = get_own_ip_address()
 
-own_ip_address = get_own_ip_address()
-if own_ip_address:
     if check_network_status(own_ip_address):
-        print("Network is up.")
+        
+        statistic = 0
     else:
-        print("Network is down.")
-else:
-    print("Failed to retrieve your IP address.")
+        
+        statistic = 1
+
+    return statistic
+
 

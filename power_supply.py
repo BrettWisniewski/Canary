@@ -4,16 +4,19 @@ def check_battery():
     battery = psutil.sensors_battery()
     if battery is not None:
         percent = battery.percent
-        if percent <= 10:
-            return [True, percent]
-    return [False, percent]
+        if percent <= 15:
+            return True
+    return False
 
 def send_message(message):
     # This function can be customized to send the message in your preferred way,
     # such as via email, SMS, or through a messaging service.
     print(message)
 
-if __name__ == "__main__":
-    list = check_battery()
-    if list[0] == True:
-        send_message("Battery is low at {0}".format(list[1]))
+
+def get_statistic_powerSupply():
+    statistic = 0
+    battery_info = check_battery()
+    if battery_info:
+        statistic = 1
+    return statistic

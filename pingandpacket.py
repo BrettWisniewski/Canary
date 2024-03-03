@@ -1,4 +1,5 @@
 from pythonping import ping
+# checking ping
 
 def check_ping(host='142.250.72.14', count=5):
     """
@@ -33,13 +34,9 @@ def update_universal(packet_loss, avg_time):
     
     return tracker
 
-def main():
-    packet_loss, avg_time = check_ping()
-    print(f'Packet Loss: {packet_loss}%')
-    print(f'Average Time: {avg_time} ms')
 
-    universal_statistic = update_universal(packet_loss, avg_time)
-    print(f'Universal Statistic: {universal_statistic}')
+packet_loss, avg_time = check_ping()
+print(f'Packet Loss: {packet_loss}%')
+print(f'Average Time: {avg_time} ms')
+statistic = update_universal(packet_loss, avg_time)
 
-if __name__ == "__main__":
-    main()
