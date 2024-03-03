@@ -1,8 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import ReactSpeedometer from 'react-d3-speedometer';
-import UserAgent from '../NetworkInfo/UserAgent';
-import IPAddress from '../NetworkInfo/IPAddress';
 import Chart from './Chart';
 
 const Speedometer = (props) => {
@@ -28,9 +26,6 @@ const Speedometer = (props) => {
           currentValueText={`${props.value}%`}
         />
       </Box>
-      <Typography variant="h6" gutterBottom fontWeight="bold">Networking Info</Typography>
-      <Typography variant="body2" gutterBottom fontFamily="'Courier New', monospace">IP Address: <IPAddress /></Typography>
-      <Typography variant="body2" gutterBottom fontFamily="'Courier New', monospace">User Agent: <UserAgent /></Typography>
       <Chart />
     </>
   );

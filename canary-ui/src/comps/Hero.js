@@ -14,6 +14,19 @@ import Chart from './items/Chart'
 
 const Hero = (props) => {
     const [value, setValue] = useState(0);
+    const zerosArray = Array.from({ length: 40 }, () => 0);
+    const [dataArray, setDataArray] = useState(zerosArray)
+    const [jitterValue, setJitterValue] = useState(value)
+
+    const makeJitterValue = (value) => {
+        const direction = Math.random() > 0.5 ? 1 : -1;
+        const jitter = Math.random() * 4 * direction;
+        let newValue = value + jitter;
+        newValue = Math.max(0, Math.min(newValue, 100));
+        newValue = Math.round(newValue);
+        return newValue;
+      };
+      
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -37,9 +50,7 @@ const Hero = (props) => {
     };
 
     const calculateBackgroundColor = (value) => {
-        const normalizedValue = value - 70;
-        const hue = normalizedValue * (5.0 / 2.0);
-        
+        const normalizedValue = value - 70;        
         return `hsl(0, 100%, ${normalizedValue}%)`;
       };
       
@@ -65,7 +76,7 @@ const Hero = (props) => {
 
     return (
         <>
-            <Container>
+            <Container sx={{marginBottom: 4}}>
                 <Paper elevation={3} style={containerStyle}>
                     <Typography variant="h2" gutterBottom fontWeight="bold">Canary</Typography>
                     <Typography variant="h6" gutterBottom><Calculations /></Typography>
