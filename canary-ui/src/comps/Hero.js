@@ -80,8 +80,38 @@ const Hero = (props) => {
         setTabValue(newValue);
     };
 
+    const sendData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/emails', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userEmail: props.userEmail,
+                emails: props.emails,
+                emailMessage: props.emailMessage,
+              }),
+      
+          });
+    
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+    
+          // Handle the successful response here
+          const result = await response.json();
+          console.log(result);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    };            
+
     if (someValue > 70) {
         document.body.style.backgroundColor = calculateBackgroundColor(someValue);
+        if (someValue > 90) {
+            sendData()
+        }
     } else {
         document.body.style.backgroundColor = "#121212";
     }
