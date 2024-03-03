@@ -13,11 +13,20 @@ import DataPoints from './DataPoints';
 import Chart from './items/Chart'
 
 const Hero = (props) => {
-    const [Value, setValue] = useState(0);
+    const [value, setValue] = useState(0);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setValue((prevValue) => (prevValue < 100 ? prevValue + 1 : 0));
+            fetch("http://localhost:5000/main-value")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Fetch error:', error);
+            });
         }, 100);
         return () => clearInterval(intervalId);
     }, []);
@@ -39,21 +48,8 @@ const Hero = (props) => {
         padding: 30,
         marginTop: 16,
         borderRadius: 15,
-        border: `2px solid ${calculateBorderColor(Value)}`,
+        border: `2px solid ${calculateBorderColor(value)}`,
     }
-
-    useEffect(() => {
-        fetch("http://localhost:5000/main-value")
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error('Fetch error:', error);
-            });
-    }, []);
 
     const [tabValue, setTabValue] = React.useState('1');
 
@@ -61,8 +57,8 @@ const Hero = (props) => {
         setTabValue(newValue);
     };
 
-    if (Value > 70) {
-        document.body.style.backgroundColor = calculateBackgroundColor(Value);
+    if (value > 70) {
+        document.body.style.backgroundColor = calculateBackgroundColor(value);
     } else {
         document.body.style.backgroundColor = "#121212";
     }
@@ -84,7 +80,7 @@ const Hero = (props) => {
                         </Box>
                         <TabPanel value="1">
                             <Typography variant="h5" gutterBottom>Network Stability Score:</Typography>
-                            <Speedometer value={Value} />
+                            <Speedometer value={value} />
                         </TabPanel>
                         <TabPanel value="2">
                             <Typography variant="h5" gutterBottom>Data Points:</Typography>

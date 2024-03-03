@@ -19,8 +19,6 @@ const DataPoints = () => {
             });
     }, []);
 
-    
-
     return (
         <>
             <Button size="large" variant='outlined' sx={{marginBottom: 2}}>Refresh<RefreshIcon /></Button>
